@@ -82,7 +82,7 @@ public class FraudDetectorAdapter extends KeyedProcessFunction<Long, Transaction
         timeState = getRuntimeContext().getState(timerDescriptor);
     }
 
-    //定时器触发，回调onTime()方法
+    //定时器触发，回调onTimer()方法
     @Override
     public void onTimer(long timestamp, KeyedProcessFunction<Long, Transaction, Alert>.OnTimerContext ctx, Collector<Alert> out) throws Exception {
         timeState.clear();
