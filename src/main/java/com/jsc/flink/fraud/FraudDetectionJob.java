@@ -1,4 +1,4 @@
-package com.jsc.flink;
+package com.jsc.flink.fraud;
 
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -32,7 +32,7 @@ public class FraudDetectionJob {
         //3.5 process()函数对流绑定了操作，传入FraudDetector()
         DataStream<Alert> alerts = transactionDataStream
                 .keyBy(Transaction::getAccountId)
-                .process(new FraudDetector())
+                .process(new FraudDetectorAdapter())
                 .name("fraud-detector");
 
         //4.定义预警任务的名称属性
@@ -42,5 +42,6 @@ public class FraudDetectionJob {
         //5.1 Flink是懒加载,完全加载后之后上传至集群进行执行，调用StreamExecutionEnvironment#execute给任务传递一个任务名参数
         //5.2 传递参数名称用于后续任务的检索
         environment.execute("Fraud Detection");
+
     }
 }

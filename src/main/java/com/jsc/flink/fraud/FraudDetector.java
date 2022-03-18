@@ -1,4 +1,4 @@
-package com.jsc.flink;
+package com.jsc.flink.fraud;
 
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.util.Collector;
